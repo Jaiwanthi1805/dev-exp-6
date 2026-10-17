@@ -5,7 +5,6 @@ pipeline {
     environment {
         MINIKUBE_HOME = 'C:\\Users\\jaiwa'
         KUBECONFIG = 'C:\\Users\\jaiwa\\.kube\\config'
-        PATH+DOCKER = 'C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin'
     }
 
     stages {
@@ -24,19 +23,19 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                bat '"C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t exp6-html:v1 .'
+                bat 'set "PATH=C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;%PATH%" && "C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t exp6-html:v1 .'
             }
         }
 
         stage('Check Minikube') {
             steps {
-                bat '"C:\\Program Files\\Kubernetes\\Minikube\\minikube.exe" status --profile=minikube'
+                bat 'set "PATH=C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;%PATH%" && "C:\\Program Files\\Kubernetes\\Minikube\\minikube.exe" status --profile=minikube'
             }
         }
 
         stage('Load Image into Minikube') {
             steps {
-                bat '"C:\\Program Files\\Kubernetes\\Minikube\\minikube.exe" image load exp6-html:v1 --profile=minikube'
+                bat 'set "PATH=C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;%PATH%" && "C:\\Program Files\\Kubernetes\\Minikube\\minikube.exe" image load exp6-html:v1 --profile=minikube'
             }
         }
 
