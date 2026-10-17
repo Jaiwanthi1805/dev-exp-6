@@ -17,7 +17,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                bat 'docker build -t exp6-html:v1 .'
+                bat '"C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t exp6-html:v1 .'
             }
         }
 
