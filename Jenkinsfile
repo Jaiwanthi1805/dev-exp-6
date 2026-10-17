@@ -5,6 +5,7 @@ pipeline {
     environment {
         MINIKUBE_HOME = 'C:\\Users\\jaiwa'
         KUBECONFIG = 'C:\\Users\\jaiwa\\.kube\\config'
+        PATH+DOCKER = 'C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin'
     }
 
     stages {
