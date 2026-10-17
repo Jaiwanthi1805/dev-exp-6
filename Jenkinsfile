@@ -1,5 +1,11 @@
+
 pipeline {
     agent any
+
+    environment {
+        MINIKUBE_HOME = 'C:\\Users\\jaiwa'
+        KUBECONFIG = 'C:\\Users\\jaiwa\\.kube\\config'
+    }
 
     stages {
         stage('Checkout') {
@@ -21,24 +27,30 @@ pipeline {
             }
         }
 
+        stage('Check Minikube') {
+            steps {
+                bat '"C:\\Program Files\\Kubernetes\\Minikube\\minikube.exe" status --profile=minikube'
+            }
+        }
+
         stage('Load Image into Minikube') {
             steps {
-                bat 'minikube image load exp6-html:v1'
+                bat '"C:\\Program Files\\Kubernetes\\Minikube\\minikube.exe" image load exp6-html:v1 --profile=minikube'
             }
         }
 
         stage('Kubernetes Deploy') {
             steps {
-                bat 'kubectl apply -f deployment.yaml'
-                bat 'kubectl apply -f service.yaml'
+                bat '"C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" apply -f deployment.yaml'
+                bat '"C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" apply -f service.yaml'
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                bat 'kubectl get deployments'
-                bat 'kubectl get pods'
-                bat 'kubectl get services'
+                bat '"C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" get deployments'
+                bat '"C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" get pods'
+                bat '"C:\\Users\\jaiwa\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" get services'
             }
         }
     }
